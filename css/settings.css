@@ -66,3 +66,7 @@
     border: 1px solid #ddd;
     border-left: 0;
 }
+.clone-wrap{
+    text-align:right;
+    margin-top:10px;
+}

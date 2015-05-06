@@ -40,7 +40,7 @@ function sp_at_display_settings_page(){
 
     $sitelist = get_option('site-list');
 
-    print_r($sitelist);
+    //print_r($sitelist);
 
     ?>
     <div class="wrap">
@@ -54,9 +54,9 @@ function sp_at_display_settings_page(){
             <div class="repeater">
                 <label>Sites</label>
                 <table class="r-fields" cellspacing="0" cellpadding="0">
-                    <?php foreach($sitelist as $site){
-
-                        print_r($site);?>
+                    <?php
+                    $i = 0;
+                    foreach($sitelist as $site){ ?>
 
                     <tr class="field-row">
                         <td class="count">1</td>
@@ -65,7 +65,7 @@ function sp_at_display_settings_page(){
                                 <label class="prepend" style="width:70px;">Site Name:</label>
                                 <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
                                 <div class="input-wrap">
-                                    <input type="text" data-type="name" data-req="1" name="site-list[0][name]" value="<?php echo $site['name'];?>" />
+                                    <input type="text" data-type="name" data-req="1" name="site-list[<?php echo $i; ?>][name]" value="<?php echo $site['name'];?>" />
                                 </div>
                             </div>
 
@@ -73,7 +73,7 @@ function sp_at_display_settings_page(){
                                 <label class="prepend" style="width:70px;">Site URL:</label>
                                 <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
                                 <div class="input-wrap">
-                                    <input type="url" data-type="url" data-req="1" name="site-list[0][url]" />
+                                    <input type="url" data-type="url" data-req="1" name="site-list[<?php echo $i; ?>][url]" value="<?php echo $site['url']; ?>" />
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@ function sp_at_display_settings_page(){
                                 <label class="prepend" style="width:70px;">API Key:</label>
                                 <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
                                 <div class="input-wrap">
-                                    <input type="text" data-type="key" data-req="1" name="site-list[0][key]" />
+                                    <input type="text" data-type="key" data-req="1" name="site-list[<?php echo $i; ?>][key]" value="<?php echo $site['key']; ?>" />
                                 </div>
                             </div>
                         </td>
@@ -91,7 +91,9 @@ function sp_at_display_settings_page(){
                     </tr>
                     <?php } ?>
                 </table>
-                <button class="button button-primary clone" data-clone=".field-row">Add Site</button>
+                <div class="clone-wrap">
+                    <button class="button button-primary clone" data-clone=".field-row">Add Site</button>
+                </div>
             </div>
         </div>
        <?php submit_button(); ?>
