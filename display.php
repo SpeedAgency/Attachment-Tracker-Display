@@ -49,11 +49,11 @@ function sp_at_display_settings_page(){
       <form method="post" action="options.php">
         <?php settings_fields('sp-at-display-settings'); ?>
         <?php do_settings_sections('sp-at-display-settings'); ?>
+        <script>var sitecount = <?php echo (count($sitelist)-1); ?>;</script>
         <div class="form-row">
             <div class="repeater">
                 <label>Sites</label>
                 <table class="r-fields" cellspacing="0" cellpadding="0">
-
                     <?php foreach($sitelist as $site){
 
                         print_r($site);?>
@@ -65,7 +65,7 @@ function sp_at_display_settings_page(){
                                 <label class="prepend" style="width:70px;">Site Name:</label>
                                 <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
                                 <div class="input-wrap">
-                                    <input type="text" data-type="name" data-req="1" name="site-list[site][name]" value="<?php echo $site['name'];?>" />
+                                    <input type="text" data-type="name" data-req="1" name="site-list[0][name]" value="<?php echo $site['name'];?>" />
                                 </div>
                             </div>
 
@@ -73,7 +73,7 @@ function sp_at_display_settings_page(){
                                 <label class="prepend" style="width:70px;">Site URL:</label>
                                 <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
                                 <div class="input-wrap">
-                                    <input type="url" data-type="url" data-req="1" name="site-list[site][url]" />
+                                    <input type="url" data-type="url" data-req="1" name="site-list[0][url]" />
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@ function sp_at_display_settings_page(){
                                 <label class="prepend" style="width:70px;">API Key:</label>
                                 <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
                                 <div class="input-wrap">
-                                    <input type="text" data-type="key" data-req="1" name="site-list[site][key]" />
+                                    <input type="text" data-type="key" data-req="1" name="site-list[0][key]" />
                                 </div>
                             </div>
                         </td>
@@ -91,44 +91,46 @@ function sp_at_display_settings_page(){
                     </tr>
                     <?php } ?>
                 </table>
-                <div class="clonefrom" style="display:none;">
-                    <tr class="field-row">
-                        <td class="count">1</td>
-                        <td class="field-group">
-                            <div class="field">
-                                <label class="prepend" style="width:70px;">Site Name:</label>
-                                <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
-                                <div class="input-wrap">
-                                    <input type="text" data-type="name" data-req="1" name="site-list[site][name]" value='' />
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="prepend" style="width:70px;">Site URL:</label>
-                                <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
-                                <div class="input-wrap">
-                                    <input type="url" data-type="url" data-req="1" name="site-list[site][url]" value="" />
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="prepend" style="width:70px;">API Key:</label>
-                                <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
-                                <div class="input-wrap">
-                                    <input type="text" data-type="key" data-req="1" name="site-list[site][key]" value="" />
-                                </div>
-                            </div>
-                        </td>
-                        <td class="remove">
-
-                        </td>
-                    </tr>
-                </div>
                 <button class="button button-primary clone" data-clone=".field-row">Add Site</button>
             </div>
         </div>
        <?php submit_button(); ?>
     </form>
+    <div class="clonefrom" style="display:none;">
+        <table>
+        <tr class="field-row">
+            <td class="count">1</td>
+            <td class="field-group">
+                <div class="field">
+                    <label class="prepend" style="width:70px;">Site Name:</label>
+                    <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
+                    <div class="input-wrap">
+                        <input type="text" data-type="name" data-req="1" name="site-list[$i][name]" value='' />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="prepend" style="width:70px;">Site URL:</label>
+                    <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
+                    <div class="input-wrap">
+                        <input type="url" data-type="url" data-req="1" name="site-list[$i][url]" value="" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="prepend" style="width:70px;">API Key:</label>
+                    <div class="append" title="Required"><i class="fa fa-exclamation-triangle"></i></div>
+                    <div class="input-wrap">
+                        <input type="text" data-type="key" data-req="1" name="site-list[$i][key]" value="" />
+                    </div>
+                </div>
+            </td>
+            <td class="remove">
+
+            </td>
+        </tr>
+    </table>
+    </div>
   </div>
     <?php
 }

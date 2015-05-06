@@ -17,10 +17,20 @@ jQuery(function($){
 
 
 
-    $("button.clone").click(function(){
+    $("button.clone").click(function(e){
+
+        sitecount++;
+
+        e.preventDefault();
         var clonewhat = $(this).data('clone');
 
-        $(".clonefrom").find('.'+clonewhat).clone().appendTo('.r-fields');
+        $(".clonefrom").find(clonewhat).clone().appendTo('.r-fields');
+
+        $(".r-fields").find(clonewhat).eq(sitecount).find('input').each(function(){
+            var data = $(this).attr('name');
+            $(this).attr('name', data.replace('$i', sitecount));
+        });
+        $(".r-fields").find(clonewhat).eq(sitecount).find('td.count').html((sitecount+1));
 
         return false;
 
