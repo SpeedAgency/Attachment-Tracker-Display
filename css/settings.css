@@ -8,6 +8,9 @@
     display: inline-block;
     margin-bottom: 10px;
 }
+.form-row label.full{
+    display:block;
+}
 .form-row .input-wrap{
     position:relative;
     overflow:hidden;
@@ -69,4 +72,34 @@
 .clone-wrap{
     text-align:right;
     margin-top:10px;
+}
+
+
+
+.data-output{
+
+}
+.data-output li{
+    list-style:none;
+    margin:0;
+}
+.data-output li h4{
+    padding:10px;
+    margin:0;
+    border:1px solid #ddd;
+    background:#f1f1f1;
+}
+.data-output table{
+    width:100%;
+}
+.data-output th{
+    padding:10px;
+    background:#ccc;
+}
+.data-output td{
+    padding:10px;
+}
+.data-output table .download-count{
+    width:20%;
+    text-align:center;
 }

@@ -15,6 +15,7 @@ function sp_at_create_display_menu(){
   wp_register_style('fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
   wp_register_script('sp-at-display-settings', plugins_url('js/settings.js', __FILE__), array('jquery'));
+  wp_register_script('sp-at-display', plugins_url('js/display.js', __FILE__), array('jquery'));
 }
 
 function register_sp_at_display_settings(){
@@ -29,7 +30,10 @@ function register_sp_at_display_settings(){
 
 function sp_at_display_page(){
 
-    echo 'sup';
+    wp_enqueue_style('sp-at-display-style');
+    wp_enqueue_style("fontawesome");
+    wp_enqueue_script('sp-at-display');
+    include('data.php');
 }
 
 
