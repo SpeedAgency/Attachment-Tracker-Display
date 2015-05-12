@@ -93,7 +93,9 @@ function sp_at_display_settings_page(){
 
                         </td>
                     </tr>
-                    <?php } ?>
+                    <?php
+                    $i++;
+                    } ?>
                 </table>
                 <div class="clone-wrap">
                     <button class="button button-primary clone" data-clone=".field-row">Add Site</button>

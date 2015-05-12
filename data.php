@@ -16,12 +16,13 @@ $sitelist = get_option('site-list');
 
             }?>
         </select>
+        <div class="spinner get-data"></div>
     </div>
     <div class="form-row">
         <label class="full">Sort by : </label>
         <select name="sort-list-select" id="sort-list">
-            <option value="name">File Name</option>
-            <option value="ip">IP Address</option>
+            <option value="sp_post_id">File Name</option>
+            <option value="sp_ip">IP Address</option>
         </select>
     </div>
     <div class="form-row">

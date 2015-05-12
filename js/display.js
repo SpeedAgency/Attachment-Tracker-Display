@@ -1,49 +1,56 @@
 jQuery(function($){
 
+    var select_site = $("#select-site");
+    var order_list = $("#sort-list");
 
-    $("#select-site").change(function(){
-
-        getdata($(this)[0].selectedOptions[0], 'name');
-
+    select_site.change(function(){
+        getdata(select_site[0].selectedOptions[0], order_list[0].selectedOptions[0]);
+    });
+    order_list.change(function(){
+        getdata(select_site[0].selectedOptions[0], order_list[0].selectedOptions[0]);
     });
 
+
     function getdata(opt, type){
+
+        $(".spinner.get-data").show();
+
         var ajaxurl = opt.dataset['ajaxurl'];
 
         var url = ajaxurl+'/wp-admin/admin-ajax.php';
         var api = opt.dataset['api'];
 
-        var formdata = {'action':'collect_data', 'key':api, 'sort':type};
+        var formdata = {'action':'collect_data', 'key':api, 'sort':type['value']};
 
         $.post(url, formdata, function(response){
             if(response['success']==1){
 
                 var output = '';
                 var data = response['data'];
+                var post_id = 0
                 for(i=0;i<data.length;i++){
 
                     var file = data[i];
-                    var name = file['name'];
+
                     var ip = '';
 
-                    if( (data[i]['data'][0]) && (data[i]['data'][0]!==null)) {
+                    ip = '<table class="ip-download" cellspacing="0" cellpadding="0">'+
+                            '<tr><th>'+response['return_sub']+'</th><th class="download-count">Downloads</th></tr>';
 
-                        ip += '<table class="ip-download" cellspacing="0" cellpadding="0">'+
-                                '<tr><th>IP Address</th><th class="download-count">Downloads</th></tr>'
-
-                        Object.keys(data[i]['data'][0]).forEach(function(key){
-
-                            ip += '<tr><td>'+key+'</td><td class="download-count">'+data[i]['data'][0][key]['total']+'</td></tr>';
-
-                        });
-
-                        ip += '</table>';
+                    for(ci=0;ci<file['content'].length;ci++){
+                        ip += '<tr><td>'+file['content'][ci]['ip']+'</td><td class="download-count">'+file['content'][ci]['data']['total']+'</td></tr>';
                     }
-                    output += '<li><h4>'+name+'</h4>'+ip+'</li>';
+                    ip += '</table>';
+
+
+                    output += '<li><h4>'+file['post_title']+' <span class="total-count">Total Downloads: '+file['total']+'</span></h4>'+ip+'</li>';
+
+
 
                 }
 
                 $(".data-output").empty().html(output);
+                $(".spinner.get-data").hide();
 
             }else{
                 alert("Argh! Something went wrong cap'an");
@@ -54,6 +61,6 @@ jQuery(function($){
     }
 
 
-    getdata($("#select-site")[0].selectedOptions[0], 'name');
+    getdata(select_site[0].selectedOptions[0], order_list[0].selectedOptions[0]);
 
 });
